@@ -1,4 +1,4 @@
-FT_CONTAINERS_DIR = ft_containers
+FT_CONTAINERS_DIR = ..
 
 FT_CONTAINERS_INCLUDES = $(FT_CONTAINERS_DIR)/includes
 
@@ -39,11 +39,5 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
-	@./$(NAME)
-ref: fclean fsan
-	@printf "\e[93mFSANITIZE ACTIVATED !\n\e[0m"
-	@./$(NAME)
 
-rel: fclean all
-	@printf "\e[92mLEAKS CHECK !\n\e[0m"
-	@leaks -atExit -- ./$(NAME)
+ref: fclean fsan

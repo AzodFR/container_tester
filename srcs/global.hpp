@@ -22,4 +22,11 @@ void print(std::string str, int res)
 }
 
 
+bool is_even(int x){return (x% 2 == 0);}
+
+
+bool abs_equ(int x, int y){return (x == y ? true : x == -y ? true : false);}
+
+
+bool is_sup(int x, int y){return (x > y);}
 #endif
