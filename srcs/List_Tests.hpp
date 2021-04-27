@@ -31,7 +31,7 @@ void list_explicit_size_constructor(std::string type)
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 
-	RES("Explicit Size Constructor<" +type+ ">");
+	RES("Explicit Size Constructor<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -51,7 +51,7 @@ void list_explicit_fill_constructor(std::string type)
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 
-	RES("Explicit Fill Constructor<" +type+ ">");
+	RES("Explicit Fill Constructor<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -70,7 +70,7 @@ void list_copy_constructor(std::string type)
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 
-	RES("Copy Constructor<" +type+ ">");	
+	RES("Copy Constructor<\e[95m" +type+ "\e[0m>");	
 	std::cout << std::endl;
 }
 
@@ -98,7 +98,23 @@ void list_pop_push(std::string type)
 	B.pop_back();
 	CHECK(".pop_back()", *(A.begin()), *(B.begin()));
 
-	RES("Pop & Push<" +type+ ">");
+	RES("Pop & Push<\e[95m" +type+ "\e[0m>");
+	std::cout << std::endl;
+}
+
+template <typename T>
+void list_front_back(std::string type)
+{
+	g_total = 0;
+	g_suc = 0;
+	ft::List<T> A(1, 9);
+	std::list<T> B(1, 9);
+
+	A.push_back(1);
+	B.push_back(1);
+	CHECK(".front()", A.front(), B.front());
+	CHECK(".back()", A.back(), B.back());
+	RES("Front & Back<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -117,7 +133,7 @@ void list_insert(std::string type)
 	B.insert(++B.begin(), 21);
 	CHECK(".insert() - begin + 1", *(++A.begin()), *(++B.begin()));
 	CHECK(".size()", A.size(), B.size());
-	RES("Insert<" +type+ ">");
+	RES("Insert<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -126,19 +142,32 @@ void list_adv_int(ft::List<T> A, std::list<T> B)
 {
 	std::cout << "---" << std::endl;
 
+
+	typename ft::List<T>::iterator A_end = A.end();
+	typename std::list<T>::iterator B_end = B.end();
 	A.push_front(-5);
 	B.push_front(-5);
+	typename ft::List<T>::iterator A_begin = A.begin();
+	typename std::list<T>::iterator B_begin = B.begin();
 	A.unique(abs_equ);
 	B.unique(abs_equ);
 	CHECK(".unique(Predicate)", A.size(), B.size());
 	CHECK(".unique(Predicate) total size", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
 	std::cout << "---" << std::endl;
 
+	A_begin = A.begin();
+	B_begin = B.begin();
 	A.remove_if(is_even);
 	B.remove_if(is_even);
 	CHECK(".remove_if(Predicate)", A.size(), B.size());
 	CHECK(".remove_if(Predicate) total size", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
 	std::cout << "---" << std::endl;
 
@@ -146,8 +175,10 @@ void list_adv_int(ft::List<T> A, std::list<T> B)
 	B.push_back(99);
 	A.push_front(12);
 	B.push_front(12);
-	A.push_front(0);
-	B.push_front(0);
+	A.push_back(0);
+	B.push_back(0);
+	A_begin = A.begin();
+	B_begin = B.begin();
 	A.sort(is_sup);
 	B.sort(is_sup);
 	CHECK(".sort(Compare)", A.size(), B.size());
@@ -155,6 +186,9 @@ void list_adv_int(ft::List<T> A, std::list<T> B)
 	CHECK(".begin() value", *A.begin(), *B.begin());
 	CHECK("last value", *(--A.end()), *(--B.end()));
 	CHECK(".end() value", *A.end(), *B.end());
+	std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 }
 
 template<typename T>
@@ -167,7 +201,7 @@ void list_resize(std::string type)
 	A.resize(500);
 	B.resize(500);
 	CHECK(".resize()", A.size(), B.size());
-	RES("Resize<" +type+ ">");
+	RES("Resize<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -178,6 +212,9 @@ void list_advanced(std::string type)
 	g_suc = 0;
 	ft::List<T> A(40, 200);
 	std::list<T> B(40, 200);
+
+	typename ft::List<T>::iterator A_end = A.end();
+	typename std::list<T>::iterator B_end = B.end();
 	CHECK(".size()", A.size(), B.size());
 
 	A.push_back(5);
@@ -195,10 +232,15 @@ void list_advanced(std::string type)
 
 	std::cout << "---" << std::endl;
 
+	typename ft::List<T>::iterator A_begin = A.begin();
+	typename std::list<T>::iterator B_begin = B.begin();
 	A.reverse();
 	B.reverse();
 	CHECK(".reverse() -- begin", *(A.begin()), *(B.begin()));
 	CHECK(".reverse() -- end", *(--A.end()), *(--B.end()));
+	std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
 	std::cout << "---" << std::endl;
 
@@ -206,17 +248,27 @@ void list_advanced(std::string type)
 	A.push_front(6);
 	B.push_front(6);
 	B.push_front(6);
+	A_begin = A.begin();
+	B_begin = B.begin();
 	A.unique();
 	B.unique();
 	CHECK(".unique()", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
 	std::cout << "---" << std::endl;
 
+	A_begin = A.begin();
+	B_begin = B.begin();
 	A.sort();
 	B.sort();
 	CHECK(".sort() -- begin", *(A.begin()), *(B.begin()));
 	CHECK(".sort() -- mid", *(++A.begin()), *(++B.begin()));
 	CHECK(".sort() -- end", *(--A.end()), *(--B.end()));
+	std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
 	CHECK(".size()", A.size(), B.size());
 	CHECK(".rbegin()", *(A.rbegin()), *(B.rbegin()));
@@ -225,7 +277,7 @@ void list_advanced(std::string type)
 //Please comment the line just under if the List type is not int, or edit the 3 bool funciton in global.hpp
 	list_adv_int(A, B);
 
-	RES("Advanced<" +type+ ">");
+	RES("Advanced<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -238,6 +290,10 @@ void list_assign(std::string type)
 	std::list<T> B(40, 200);
 	ft::List<T> A2(60, 999);
 	std::list<T> B2(60, 999);
+	typename ft::List<T>::iterator A_begin = A2.begin();
+	typename std::list<T>::iterator B_begin = B2.begin();
+	typename ft::List<T>::iterator A_end = --A2.end();
+	typename std::list<T>::iterator B_end = --B2.end();
 
 	B.assign(20, 100);
 	A.assign(20, 100);
@@ -247,7 +303,7 @@ void list_assign(std::string type)
 	CHECK(".assign() -- last value", *(--A.end()), *(--B.end()));
 	CHECK(".assign() .end() value", *A.end(), *B.end());
 
-	std::cout << "---" << std::endl;
+		std::cout << "---" << std::endl;
 
 	A.assign((++(++(++A2.begin()))), (--(--(--A2.end()))));
 	B.assign((++(++(++B2.begin()))), (--(--(--B2.end()))));
@@ -256,8 +312,11 @@ void list_assign(std::string type)
 	CHECK(".assign(iterator) -- .begin() value", *A.begin(), *B.begin());
 	CHECK(".assign(iterator) -- last value", *(--A.end()), *(--B.end()));
 	CHECK(".assign(iterator) .end() value", *A.end(), *B.end());
+		std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
-	RES("Assign<" +type+ ">");
+	RES("Assign<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -266,25 +325,140 @@ void list_splice(std::string type)
 {
 	g_total = 0;
 	g_suc = 0;
-	ft::List<T> A(40, 200);
-	std::list<T> B(40, 200);
+	ft::List<T> A(40, 333);
+	std::list<T> B(40, 333);
 	ft::List<T> A2(60, 999);
 	std::list<T> B2(60, 999);
+	ft::List<T> A3(20, 666);
+	std::list<T> B3(20, 666);
+	ft::List<T> A4(80, 369);
+	std::list<T> B4(80, 369);
+	typename ft::List<T>::iterator A_begin = A2.begin();
+	typename std::list<T>::iterator B_begin = B2.begin();
+	typename ft::List<T>::iterator A_end = --A2.end();
+	typename std::list<T>::iterator B_end = --B2.end();
 
 	A.splice(--A.end(), A2);
 	B.splice(--B.end(), B2);
-	CHECK(".splice(List 1) -- size", A.size(), B.size());
-	CHECK(".splice(List 1) total size", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
-	CHECK(".splice(List 1) -- .begin() value", *A.begin(), *B.begin());
-	CHECK(".splice(List 1) -- last value", *(--A.end()), *(--B.end()));
-	CHECK(".splice(List 1) .end() value", *A.end(), *B.end());
-	std::cout << "---" << std::endl;
-	CHECK(".splice(List 2) -- size", A2.size(), B2.size());
-	CHECK(".splice(List 2) total size", get_total(A2.begin(), A2.end()), get_total(B2.begin(), B2.end()));
-	CHECK(".splice(List 2) -- .begin() value", *A2.begin(), *B2.begin());
-	CHECK(".splice(List 2) -- last value", *(--A2.end()), *(--B2.end()));
-	CHECK(".splice(List 2) .end() value", *A2.end(), *B2.end());
-	RES("Splice<" +type+ ">");
+	CHECK(".splice(iterator pos, other list) -- size (list 1)", A.size(), B.size());
+	CHECK(".splice(iterator pos, other list) total size (list 1)", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	CHECK(".splice(iterator pos, other list) -- .begin() value (list 1)", *A.begin(), *B.begin());
+	CHECK(".splice(iterator pos, other list) -- last value (list 1)", *(--A.end()), *(--B.end()));
+	CHECK(".splice(iterator pos, other list) .end() value (list 1)", *A.end(), *B.end());
+		std::cout << "---" << std::endl;
+	CHECK(".splice(iterator pos, other list) -- size (list 2)", A2.size(), B2.size());
+	CHECK(".splice(iterator pos, other list) total size (list 2)", get_total(A2.begin(), A2.end()), get_total(B2.begin(), B2.end()));
+	CHECK(".splice(iterator pos, other list) -- .begin() value (list 2)", *A2.begin(), *B2.begin());
+	CHECK(".splice(iterator pos, other list) -- last value (list 2)", *(--A2.end()), *(--B2.end()));
+	CHECK(".splice(iterator pos, other list) .end() value (list 2)", *A2.end(), *B2.end());
+		std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
+
+		std::cout << "---" << std::endl;
+	A_begin = A.begin();
+	B_begin = B.begin();
+	A.splice(++A.begin(), A3, --A3.end());
+	B.splice(++B.begin(), B3, --B3.end());
+	CHECK(".splice(iterator pos, other list, iterator elem) -- size (list 1)", A.size(), B.size());
+	CHECK(".splice(iterator pos, other list, iterator elem) total size (list 1)", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	CHECK(".splice(iterator pos, other list, iterator elem) -- .begin() value (list 1)", *A.begin(), *B.begin());
+	CHECK(".splice(iterator pos, other list, iterator elem) -- last value (list 1)", *(--A.end()), *(--B.end()));
+	CHECK(".splice(iterator pos, other list, iterator elem) .end() value (list 1)", *A.end(), *B.end());
+		std::cout << "---" << std::endl;
+	CHECK(".splice(iterator pos, other list, iterator elem) -- size (list 2)", A3.size(), B3.size());
+	CHECK(".splice(iterator pos, other list, iterator elem) total size (list 2)", get_total(A3.begin(), A3.end()), get_total(B3.begin(), B3.end()));
+	CHECK(".splice(iterator pos, other list, iterator elem) -- .begin() value (list 2)", *A3.begin(), *B3.begin());
+	CHECK(".splice(iterator pos, other list, iterator elem) -- last value (list 2)", *(--A3.end()), *(--B3.end()));
+	CHECK(".splice(iterator pos, other list, iterator elem) .end() value (list 2)", *A3.end(), *B3.end());
+		std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
+
+		std::cout << "---" << std::endl;
+	A.splice(--(--(A.end())), A4, ++A4.begin(), A4.end());
+	B.splice(--(--(B.end())), B4, ++B4.begin(), B4.end());
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) -- size (list 1)", A.size(), B.size());
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) total size (list 1)", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) -- .begin() value (list 1)", *A.begin(), *B.begin());
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) -- last value (list 1)", *(--A.end()), *(--B.end()));
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) .end() value (list 1)", *A.end(), *B.end());
+		std::cout << "---" << std::endl;
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) -- size (list 2)", A4.size(), B4.size());
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) total size (list 2)", get_total(A4.begin(), A4.end()), get_total(B4.begin(), B4.end()));
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) -- .begin() value (list 2)", *A4.begin(), *B4.begin());
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) -- last value (list 2)", *(--A4.end()), *(--B4.end()));
+	CHECK(".splice(iterator pos, other list, iterator start, iterator end) .end() value (list 2)", *A4.end(), *B4.end());
+		std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
+
+	RES("Splice<\e[95m" +type+ "\e[0m>");
+	std::cout << std::endl;
+}
+
+template<typename T>
+void list_erase(std::string type)
+{
+	g_total = 0;
+	g_suc = 0;
+	ft::List<T> A(50, 106);
+	std::list<T> B(50, 106);
+	ft::List<T> A2(106, 50);
+	std::list<T> B2(106, 50);
+	typename ft::List<T>::iterator A_begin = A.begin();
+	typename std::list<T>::iterator B_begin = B.begin();
+	typename ft::List<T>::iterator A_end = A.end();
+	typename std::list<T>::iterator B_end = B.end();
+
+
+	A.erase(++A.begin());
+	B.erase(++B.begin());
+	CHECK(".erase(from 2nd element) -- size", A.size(), B.size());
+	CHECK(".erase(from 2nd element) total size", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	CHECK(".erase(from 2nd element) -- .begin() value", *A.begin(), *B.begin());
+	CHECK(".erase(from 2nd element) -- last value", *(--A.end()), *(--B.end()));
+	CHECK(".erase(from 2nd element) .end() value", *A.end(), *B.end());
+		std::cout << "---" << std::endl;
+	CHECK("iterator still valid", *A_begin, *B_begin);
+	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
+		std::cout << "---" << std::endl;
+	A2.erase(A2.begin(), ++A2.begin());
+	B2.erase(B2.begin(), ++B2.begin());
+	typename ft::List<T>::reverse_iterator rA_begin = A2.rbegin();
+	typename ft::List<T>::reverse_iterator rA_end = A2.rend();
+	typename std::list<T>::reverse_iterator rB_end = B2.rend();
+	typename std::list<T>::reverse_iterator rB_begin = B2.rbegin();
+	CHECK(".erase(2 firsts elements) -- size", A2.size(), B2.size());
+	CHECK(".erase(2 firsts elements) total size", get_total(A2.begin(), A2.end()), get_total(B2.begin(), B2.end()));
+	CHECK(".erase(2 firsts elements) -- .begin() value", *A2.begin(), *B2.begin());
+	CHECK(".erase(2 firsts elements) -- last value", *(--A2.end()), *(--B2.end()));
+	CHECK(".erase(2 firsts elements) .end() value", *A2.end(), *B2.end());
+			std::cout << "---" << std::endl;
+	CHECK("reverse iterator still valid", *++rA_begin, *++rB_begin);
+	CHECK("reverse iterator still valid total size", get_total(rA_begin, rA_end), get_total(rB_begin, rB_end));
+
+	RES("Erase<\e[95m" +type+ "\e[0m>");
+	std::cout << std::endl;
+}
+
+template<typename T>
+void list_clear(std::string type)
+{
+	g_total = 0;
+	g_suc = 0;
+	ft::List<T> A(50, 106);
+	std::list<T> B(50, 106);
+
+	A.clear();
+	B.clear();
+	CHECK(".size()",A.size(), B.size());
+	CHECK(".max_size()", A.max_size(), B.max_size());
+	CHECK(".begin() value", *A.begin(), *B.begin());
+	CHECK(".end() value", *A.end(), *B.end());
+	CHECK(".empty()", A.empty(), B.empty());
+	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	RES("Clear<"+type+">");
 	std::cout << std::endl;
 }
 
@@ -295,9 +469,12 @@ void list_all(std::string type)
 	list_explicit_fill_constructor<T>(type);
 	list_copy_constructor<T>(type);
 	list_pop_push<T>(type);
+	list_front_back<T>(type);
 	list_insert<T>(type);
 	list_resize<T>(type);
-	list_advanced<T>(type);
 	list_assign<T>(type);
 	list_splice<T>(type);
+	list_erase<T>(type);
+	list_clear<T>(type);
+	list_advanced<T>(type);
 }
