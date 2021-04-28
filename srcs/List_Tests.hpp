@@ -458,13 +458,116 @@ void list_clear(std::string type)
 	CHECK(".end() value", *A.end(), *B.end());
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
-	RES("Clear<"+type+">");
+	RES("Clear<\e[95m" +type+ "\e[0m>");
+	std::cout << std::endl;
+}
+
+template<typename T>
+void list_merge(std::string type)
+{
+	g_total = 0;
+	g_suc = 0;
+	ft::List<T> A;
+	std::list<T> B;
+	ft::List<T> C;
+	std::list<T> D;
+
+	A.push_front(8);
+	B.push_front(8);
+	A.push_back(6);
+	B.push_back(6);
+	A.insert(++A.begin(), 27);
+	B.insert(++B.begin(), 27);
+
+	C.push_back(2);
+	D.push_back(2);
+	C.push_front(5);
+	D.push_front(5);
+	C.insert(++C.begin(), 10);
+	D.insert(++D.begin(), 10);
+
+	A.sort();
+	B.sort();
+	C.sort();
+	D.sort();
+
+	CHECK(".size() after sort",A.size(), B.size());
+	CHECK(".sort() begin",*A.begin(), *B.begin());
+	CHECK(".sort() mid",*++A.begin(), *++B.begin());
+	CHECK(".sort() end",*--A.end(), *--B.end());
+	A.merge(C);
+	B.merge(D);
+	typename ft::List<T>::iterator C_begin = A.begin();
+	typename ft::List<T>::iterator C_end = A.end();
+	typename std::list<T>::iterator D_begin = B.begin();
+	typename std::list<T>::iterator D_end = B.end();
+	CHECK(".size()",A.size(), B.size());
+	int i = 0;
+	while (C_begin != C_end && D_begin != D_end)	
+	{
+		std::string text = ".merge() element [";
+		text += std::to_string(i++);
+		text += "]";
+		CHECK(text, *C_begin, *D_begin);
+		C_begin++;
+		D_begin++;
+	}
+	CHECK(".end() value", *A.end(), *B.end());
+	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+
+		std::cout << "---" << std::endl;
+	A.clear();
+	B.clear();
+	C.clear();
+	D.clear();
+	A.push_front(-5);
+	A.push_back(6);
+	A.insert(++A.begin(), 29);
+
+	B.push_front(-5);
+	B.push_back(6);
+	B.insert(++B.begin(), 29);
+
+	C.push_front(5);
+	C.push_back(-9);
+	D.push_front(5);
+	D.push_back(-9);
+
+	A.sort(abs_sort);
+	B.sort(abs_sort);
+	C.sort(abs_sort);
+	D.sort(abs_sort);
+	CHECK(".size() after sort",A.size(), B.size());
+	CHECK(".sort(absolute) begin",*A.begin(), *B.begin());
+	CHECK(".sort(absolute) mid",*++A.begin(), *++B.begin());
+	CHECK(".sort(absolute) end",*--A.end(), *--B.end());
+	A.merge(C, abs_sort);
+	B.merge(D, abs_sort);
+	C_begin = A.begin();
+	C_end = A.end();
+	D_begin = B.begin();
+	D_end = B.end();
+	CHECK(".size()",A.size(), B.size());
+	i = 0;
+	while (C_begin != C_end && D_begin != D_end)	
+	{
+		std::string text = ".merge(absolute) element [";
+		text += std::to_string(i++);
+		text += "]";
+		CHECK(text, *C_begin, *D_begin);
+		C_begin++;
+		D_begin++;
+	}
+	CHECK(".end() value", *A.end(), *B.end());
+	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+	RES("Merge<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
 template<typename T>
 void list_all(std::string type)
 {
+	std::cout << "\e[91m=================== LIST ===================\e[0m" << std::endl;
 	list_explicit_size_constructor<T>(type);
 	list_explicit_fill_constructor<T>(type);
 	list_copy_constructor<T>(type);
@@ -477,4 +580,5 @@ void list_all(std::string type)
 	list_erase<T>(type);
 	list_clear<T>(type);
 	list_advanced<T>(type);
+	list_merge<T>(type);
 }

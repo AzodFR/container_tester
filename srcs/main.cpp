@@ -2,6 +2,7 @@
 #include "global.hpp"
 
 #include "List_Tests.hpp"
+#include "Stack_Tests.hpp"
 
 int main()
 {
@@ -13,6 +14,7 @@ int main()
 	signal(SIGBUS, sigs);
 
 	list_all<int>("int");
+	stack_all<int>("int");
 	TOTAL();
 	std::cout << "\e[0m";
 	return (0);

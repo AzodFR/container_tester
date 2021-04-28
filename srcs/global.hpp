@@ -41,6 +41,6 @@ bool is_even(int x){return (x% 2 == 0);}
 
 bool abs_equ(int x, int y){return (x == y ? true : x == -y ? true : false);}
 
-
+bool abs_sort(int x, int y){ if (x < 0) x = -x; if (y < 0) y = -y; return (x < y);}
 bool is_sup(int x, int y){return (x > y);}
 #endif

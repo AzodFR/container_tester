@@ -26,7 +26,7 @@
 
 [x] List (In progress)
 
-[x] Stack
+[x] Stack (In progress)
 
 [x] Queue
 
