@@ -31,7 +31,7 @@ void list_explicit_size_constructor(std::string type)
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 
-	RES("Explicit Size Constructor<\e[95m" +type+ "\e[0m>");
+	RES("List::Explicit Size Constructor<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -51,7 +51,7 @@ void list_explicit_fill_constructor(std::string type)
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 
-	RES("Explicit Fill Constructor<\e[95m" +type+ "\e[0m>");
+	RES("List::Explicit Fill Constructor<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -70,7 +70,7 @@ void list_copy_constructor(std::string type)
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 
-	RES("Copy Constructor<\e[95m" +type+ "\e[0m>");	
+	RES("List::Copy Constructor<\e[95m" +type+ "\e[0m>");	
 	std::cout << std::endl;
 }
 
@@ -98,7 +98,7 @@ void list_pop_push(std::string type)
 	B.pop_back();
 	CHECK(".pop_back()", *(A.begin()), *(B.begin()));
 
-	RES("Pop & Push<\e[95m" +type+ "\e[0m>");
+	RES("List::Pop & Push<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -114,7 +114,7 @@ void list_front_back(std::string type)
 	B.push_back(1);
 	CHECK(".front()", A.front(), B.front());
 	CHECK(".back()", A.back(), B.back());
-	RES("Front & Back<\e[95m" +type+ "\e[0m>");
+	RES("List::Front & Back<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -133,7 +133,7 @@ void list_insert(std::string type)
 	B.insert(++B.begin(), 21);
 	CHECK(".insert() - begin + 1", *(++A.begin()), *(++B.begin()));
 	CHECK(".size()", A.size(), B.size());
-	RES("Insert<\e[95m" +type+ "\e[0m>");
+	RES("List::Insert<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -201,7 +201,7 @@ void list_resize(std::string type)
 	A.resize(500);
 	B.resize(500);
 	CHECK(".resize()", A.size(), B.size());
-	RES("Resize<\e[95m" +type+ "\e[0m>");
+	RES("List::Resize<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -277,7 +277,7 @@ void list_advanced(std::string type)
 //Please comment the line just under if the List type is not int, or edit the 3 bool funciton in global.hpp
 	list_adv_int(A, B);
 
-	RES("Advanced<\e[95m" +type+ "\e[0m>");
+	RES("List::Advanced<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -316,7 +316,7 @@ void list_assign(std::string type)
 	CHECK("iterator still valid", *A_begin, *B_begin);
 	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
-	RES("Assign<\e[95m" +type+ "\e[0m>");
+	RES("List::Assign<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -393,7 +393,7 @@ void list_splice(std::string type)
 	CHECK("iterator still valid", *A_begin, *B_begin);
 	CHECK("iterator still valid total size", get_total(A_begin, A_end), get_total(B_begin, B_end));
 
-	RES("Splice<\e[95m" +type+ "\e[0m>");
+	RES("List::Splice<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -438,7 +438,7 @@ void list_erase(std::string type)
 	CHECK("reverse iterator still valid", *++rA_begin, *++rB_begin);
 	CHECK("reverse iterator still valid total size", get_total(rA_begin, rA_end), get_total(rB_begin, rB_end));
 
-	RES("Erase<\e[95m" +type+ "\e[0m>");
+	RES("List::Erase<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -458,7 +458,7 @@ void list_clear(std::string type)
 	CHECK(".end() value", *A.end(), *B.end());
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
-	RES("Clear<\e[95m" +type+ "\e[0m>");
+	RES("List::Clear<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 
@@ -560,7 +560,7 @@ void list_merge(std::string type)
 	}
 	CHECK(".end() value", *A.end(), *B.end());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
-	RES("Merge<\e[95m" +type+ "\e[0m>");
+	RES("List::Merge<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
 }
 

@@ -24,11 +24,11 @@
 
 # Active test
 
-[x] List (In progress)
+[✅] List
 
-[x] Stack (In progress)
+[✅] Stack
 
-[x] Queue
+[✅] Queue
 
 [x] Vector
 
