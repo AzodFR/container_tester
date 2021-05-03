@@ -1,5 +1,5 @@
 #include "global.hpp"
-#include "Stack2.hpp"
+#include "Stack.hpp"
 #include <stack>
 #include <deque>
 
