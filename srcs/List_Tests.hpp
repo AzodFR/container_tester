@@ -56,6 +56,28 @@ void list_explicit_fill_constructor(std::string type)
 }
 
 template<typename T>
+void list_explicit_range_constructor(std::string type)
+{
+	g_total = 0;
+	g_suc = 0;
+
+	ft::List<T> C(6, 100);
+	std::list<T> D(6, 100);
+	ft::List<T> A(C.begin(), C.end());
+	std::list<T> B(D.begin(), D.end());
+
+	CHECK(".size()",A.size(), B.size());
+	CHECK(".max_size()", A.max_size(), B.max_size());
+	CHECK(".begin() value", *A.begin(), *B.begin());
+	CHECK(".end() value", *A.end(), *B.end());
+	CHECK(".empty()", A.empty(), B.empty());
+	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+
+	RES("List::Explicit Range Constructor<\e[95m" +type+ "\e[0m>");
+	std::cout << std::endl;
+}
+
+template<typename T>
 void list_copy_constructor(std::string type)
 {
 	g_total = 0;
@@ -570,6 +592,7 @@ void list_all(std::string type)
 	std::cout << "\e[91m=================== LIST ===================\e[0m" << std::endl;
 	list_explicit_size_constructor<T>(type);
 	list_explicit_fill_constructor<T>(type);
+	list_explicit_range_constructor<T>(type);
 	list_copy_constructor<T>(type);
 	list_pop_push<T>(type);
 	list_front_back<T>(type);
