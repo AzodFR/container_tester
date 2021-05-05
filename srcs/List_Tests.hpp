@@ -63,15 +63,18 @@ void list_explicit_range_constructor(std::string type)
 
 	ft::List<T> C(6, 100);
 	std::list<T> D(6, 100);
-	ft::List<T> A(C.begin(), C.end());
-	std::list<T> B(D.begin(), D.end());
+	ft::List<T> Ar(C.begin(), C.end());
+	std::list<T> Br(D.begin(), D.end());
 
-	CHECK(".size()",A.size(), B.size());
-	CHECK(".max_size()", A.max_size(), B.max_size());
-	CHECK(".begin() value", *A.begin(), *B.begin());
-	CHECK(".end() value", *A.end(), *B.end());
-	CHECK(".empty()", A.empty(), B.empty());
-	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
+std::cout << C.size() << std::endl;
+std::cout <<Ar.size() << std::endl;
+
+	CHECK(".size()",Ar.size(), Br.size());
+	CHECK(".max_size()", Ar.max_size(), Br.max_size());
+	CHECK(".begin() value", *Ar.begin(), *Br.begin());
+	CHECK(".end() value", *Ar.end(), *Br.end());
+	CHECK(".empty()", Ar.empty(), Br.empty());
+	CHECK("total value", get_total(Ar.begin(), Ar.end()), get_total(Br.begin(), Br.end()));
 
 	RES("List::Explicit Range Constructor<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
