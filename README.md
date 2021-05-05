@@ -30,6 +30,6 @@
 
 [✅] Queue
 
-[x] Vector
+[✅] Vector
 
 [x] Map
