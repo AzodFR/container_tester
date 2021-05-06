@@ -8,6 +8,7 @@ int g_s;
 std::string g_last;
 
 # define CHECK(str, x, y) g_last = str; if (x == y) print(str, 1); else {print(str, 0); std::cout << "\e[90m[Excepted: "<< y << " | You: " << x << "]\e[0m" << std::endl;}
+# define S_CHECK(str, x, y) g_last = str; if (x != y) {print(str, 0); std::cout << "\e[90m[Excepted: "<< y << " | You: " << x << "]\e[0m" << std::endl;}
 # define RES(str) std::cout << str << ": "; if (g_suc == g_total) std::cout << "\e[92m"; else std::cout << "\e[91m"; std::cout << g_suc << "/" << g_total << "\e[0m" << std::endl;
 # define TOTAL() std::cout << "Total: "; if (g_s == g_t) std::cout << "\e[92m"; else std::cout << "\e[91m"; std::cout << g_s << "/" << g_t << "\e[0m" << std::endl;
 
@@ -36,11 +37,11 @@ void sigs(int signal)
 }
 
 
-bool is_even(int x){return (x% 2 == 0);}
+bool is_even(float x){return (static_cast<int>(x) % 2 == 0);}
 
 
-bool abs_equ(int x, int y){return (x == y ? true : x == -y ? true : false);}
+bool abs_equ(float x, float y){return (x == y ? true : x == -y ? true : false);}
 
-bool abs_sort(int x, int y){ if (x < 0) x = -x; if (y < 0) y = -y; return (x < y);}
-bool is_sup(int x, int y){return (x > y);}
+bool abs_sort(float x, float y){ if (x < 0) x = -x; if (y < 0) y = -y; return (x < y);}
+bool is_sup(float x, float y){return (x > y);}
 #endif

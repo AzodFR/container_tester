@@ -5,6 +5,7 @@
 #include "Stack_Tests.hpp"
 #include "Queue_Tests.hpp"
 #include "Vector_Tests.hpp"
+#include "Map_Tests.hpp"
 
 int main()
 {
@@ -15,10 +16,11 @@ int main()
 	signal(SIGABRT, sigs);
 	signal(SIGBUS, sigs);
 
-	list_all<int>("int");
+	list_all<float>("float");
 	stack_all<int>("int");
 	queue_all<int>("int");
 	vector_all<int>("int");
+	map_all<int>("int");
 
 	TOTAL();
 	std::cout << "\e[0m";

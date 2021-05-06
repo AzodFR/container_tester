@@ -46,16 +46,16 @@ void vector_constructor_range(std::string type)
 	g_total = 0;
 	g_suc = 0;
 
-	// ft::Vector<T> C(5, 255);
-	// std::vector<T> D(5, 255);
-	// ft::Vector<T> A(C.begin(), --C.end());
-	// std::vector<T> B(D.begin(), --D.end());
+	ft::Vector<T> C(5, 255);
+	std::vector<T> D(5, 255);
+	ft::Vector<T> A(C.begin(), --C.end());
+	std::vector<T> B(D.begin(), --D.end());
 
-	// CHECK(".size()",A.size(), B.size());
-	// CHECK(".empty()", A.empty(), B.empty());
-	// CHECK(".max_size()",A.max_size(), B.max_size());
-	// CHECK(".capacity()", A.capacity(), B.capacity());
-	// CHECK(".front()", A.front(), B.front());
+	CHECK(".size()",A.size(), B.size());
+	CHECK(".empty()", A.empty(), B.empty());
+	CHECK(".max_size()",A.max_size(), B.max_size());
+	CHECK(".capacity()", A.capacity(), B.capacity());
+	CHECK(".front()", A.front(), B.front());
 	
 	RES("Vector::Range constructor<\e[95m" +type+ "\e[0m>");
 	std::cout << std::endl;
@@ -230,7 +230,7 @@ void vector_push_pop_back_function(std::string type)
 		std::string text = ".push_back(";
 		text += std::to_string(i++);
 		text += ")";
-		CHECK("push_back", *a_begin, *b_begin);
+		CHECK(text, *a_begin, *b_begin);
 		A.push_back(i);
 		B.push_back(i);
 		a_begin = A.rbegin();
@@ -339,6 +339,7 @@ void vector_swap(std::string type)
 template <typename T>
 void vector_all(std::string type)
 {
+		std::cout << "\e[91m=================== VECTOR ===================\e[0m" << std::endl;
 	vector_constructor_empty<T>(type);
 	vector_constructor_fill<T>(type);
 	vector_constructor_range<T>(type);
