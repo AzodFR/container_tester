@@ -291,34 +291,6 @@ void map_swap(std::string type)
 }
 
 template<typename T>
-void map_bound(std::string type)
-{
-	g_total = 0;
-	g_suc = 0;
-	std::string str[] = {"zero", "one", "two", "three"};
-	ft::Map<std::string, T> A;
-	std::map<std::string, T> B;
-
-	for (int i = 0; i < 4; i++)
-	{
-		ft::pair<std::string, T> A2(str[i], i);
-		std::pair<std::string, T> B2(str[i], i);
-		A.insert(A2);
-		B.insert(B2);
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		CHECK(".lower_bound(" + str[i] +")", A.lower_bound(str[i])->first, B.lower_bound(str[i])->first);
-		CHECK(".upper_bound(" + str[i]+")", A.upper_bound(str[i])->first, B.upper_bound(str[i])->first);
-		CHECK(".lower_bound(" + str[i] +")", A.lower_bound(str[i])->second, B.lower_bound(str[i])->second);
-		CHECK(".upper_bound(" + str[i]+")", A.upper_bound(str[i])->second, B.upper_bound(str[i])->second);
-	}
-
-	RES("Map::Upper/Lower Bound<\e[95mstd::string, " +type+ "\e[0m>");
-	std::cout << std::endl;
-}
-
-template<typename T>
 void map_all(std::string type)
 {
 		std::cout << "\e[91m=================== MAP ===================\e[0m" << std::endl;
@@ -327,5 +299,4 @@ void map_all(std::string type)
 	map_insert<T>(type);
 	map_erase<T>(type);
 	map_swap<T>(type);
-	map_bound<T>(type);
 }
