@@ -479,8 +479,6 @@ void list_clear(std::string type)
 	B.clear();
 	CHECK(".size()",A.size(), B.size());
 	CHECK(".max_size()", A.max_size(), B.max_size());
-	CHECK(".begin() value", *A.begin(), *B.begin());
-//	CHECK(".end() value", *A.end(), *B.end());
 	CHECK(".empty()", A.empty(), B.empty());
 	CHECK("total value", get_total(A.begin(), A.end()), get_total(B.begin(), B.end()));
 	RES("List::Clear<\e[95m" +type+ "\e[0m>");
@@ -602,6 +600,8 @@ void list_all(std::string type)
 	list_insert<T>(type);
 	list_resize<T>(type);
 	list_assign<T>(type);
+	list_splice<T>(type);
+	list_splice<T>(type);
 	list_splice<T>(type);
 	list_erase<T>(type);
 	list_clear<T>(type);
